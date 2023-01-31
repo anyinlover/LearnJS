@@ -1,0 +1,27 @@
+<p>🎈</p>
+
+<script>
+  let balloon = document.body.getElementsByTagName("p")[0];
+  let size = 10;
+  balloon.style.fontSize = size.toString() + "px";
+  
+  
+  // Your code here
+  let change = event => {
+    if (event.key == "ArrowUp") {
+      size *= 1.1;
+      balloon.style.fontSize = size + "px";
+      event.preventDefault();
+      if (size > 20) {
+        balloon.textContent = "💥";
+        document.body.removeEventListener("keydown", change);
+      }
+    } else if (event.key == "ArrowDown") {
+      size *= 0.9;
+      balloon.style.fontSize = size + "px";
+      event.preventDefault();
+    }
+  };
+  
+  document.body.addEventListener("keydown", change);
+</script>

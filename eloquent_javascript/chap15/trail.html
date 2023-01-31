@@ -1,0 +1,30 @@
+<style>
+  .trail { /* className for the trail elements */
+    position: absolute;
+    height: 6px; width: 6px;
+    border-radius: 3px;
+    background: teal;
+  }
+  body {
+    height: 300px;
+  }
+</style>
+
+<script>
+  // Your code here.
+  let dots = [];
+  for (const i of Array(12).keys()) {
+    let dot = document.createElement("div");
+    dot.className = "trail";
+    document.body.appendChild(dot);
+    dots.push(dot);
+  }
+  
+  let i = 0;
+  window.addEventListener("mousemove", event => {
+    let dot = dots[i];
+    dot.style.left = (event.pageX - 3) + "px";
+    dot.style.top = (event.pageY - 3) + "px";
+    i = (i+1) % dots.length;
+  });
+</script>

@@ -1,0 +1,38 @@
+<tab-panel>
+<div data-tabname="one">Tab one</div>
+<div data-tabname="two">Tab two</div>
+<div data-tabname="three">Tab three</div>
+</tab-panel>
+<script>
+
+function asTabs(node) {
+    // Your code here.
+    let maps = {};
+    let selected;
+    
+    onTab = event => {
+    if (event.target != selected) {
+        maps[selected.textContent].style.display = "none";
+        maps[event.target.textContent].style.display = "";
+        selected.style.color = "";
+        event.target.style.color = "red";
+        selected = event.target;
+    }
+    };   
+    
+    for (let i = 0; i < node.children.length; i++) {
+    let button = document.createElement("button");
+    button.textContent = node.children[i].getAttribute("data-tabname");
+    button.addEventListener("click", onTab);
+    document.body.insertBefore(button, node);
+    maps[node.children[i].getAttribute("data-tabname")] = node.children[i];
+    if (i == 0) {
+        button.style.color = "red";
+        selected = button;
+    } else {
+        node.children[i].style.display = "none";
+    }
+    }
+}
+asTabs(document.querySelector("tab-panel"));
+</script>
