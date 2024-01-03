@@ -119,6 +119,22 @@ function goalOrientedRobot({place, parcels}, route) {
     return {direction: route[0], memory: route.slice(1)};
 }
 
+function effiOrientedRobot({place, parcels}, route) {
+  if (route.length == 0) {
+    for (let parcel of parcels) {
+      if (parcel.place == place) {
+        route = findRoute(roadGraph, place, parcel.address);
+        break
+      }
+    }
+  }
+  if (route.length == 0) {
+    let parcel = parcels[0];
+    route = findRoute(roadGraph, place, parcel.place);
+  }
+  return {direction: route[0], memory: route.slice(1)};
+}
+
 let first = new VillageState(
     "Post Office",
     [{place: "Post Office", address: "Alice's House"}]
@@ -129,6 +145,8 @@ console.log(next.place);
 console.log(next.parcels);
 console.log(first.place);
 
-runRobot(VillageState.random(), randomRobot);
-runRobot(VillageState.random(), routeRobot, mailRoute);
-runRobot(VillageState.random(), goalOrientedRobot, []);
+//runRobot(VillageState.random(), randomRobot);
+//runRobot(VillageState.random(), routeRobot, mailRoute);
+let firstState = VillageState.random();
+runRobot(firstState, goalOrientedRobot, []);
+runRobot(firstState, effiOrientedRobot, []);

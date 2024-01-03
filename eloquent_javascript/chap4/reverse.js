@@ -1,4 +1,4 @@
-let reverseArray = (ary) => {
+function reverseArray(ary) {
     let nary = []
     for (let i = ary.length - 1; i >= 0; i--) {
         nary.push(ary[i]);
@@ -6,7 +6,7 @@ let reverseArray = (ary) => {
     return nary;
 }
 
-let reverseArrayInPlace = (ary) => {
+function reverseArrayInPlace(ary) {
     let i = 0;
     let j = ary.length - 1;
     let tmp;
@@ -19,7 +19,7 @@ let reverseArrayInPlace = (ary) => {
     }
 }
 
-let x = [1,3,5,7,9];
+let x = [1, 3, 5, 7, 9];
 console.log(reverseArray(x));
 reverseArrayInPlace(x);
 console.log(x);

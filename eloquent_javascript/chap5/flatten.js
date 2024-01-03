@@ -1,5 +1,5 @@
-let flatten = (x) => {
-    return x.reduce((a,b)=>a.concat(b));
+function flatten(x) {
+    return x.reduce((a, b) => a.concat(b));
 }
 
-console.log(flatten([[1,2],[3,4]]));
+console.log(flatten([[1, 2], [3, 4]]));
