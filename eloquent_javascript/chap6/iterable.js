@@ -5,11 +5,11 @@ class GroupIterator {
     }
 
     next() {
-        if (this.i == this.group.ary.length) return {done: true};
+        if (this.i == this.group.ary.length) return { done: true };
 
         let value = this.group.ary[this.i];
         this.i++;
-        return {value, done: false};
+        return { value, done: false };
     }
 }
 
@@ -24,26 +24,12 @@ class Group {
         }
     }
 
-
     delete(key) {
-        if (this.has(key)) {
-            let ary = [];
-            for (let a of this.ary) {
-                if (a !== key) {
-                    ary.push(a);
-                }
-            }
-            this.ary = ary;
-        }
+        this.ary = this.ary.filter(v => v != key);
     }
 
     has(key) {
-        for (let a of this.ary) {
-            if (a === key) {
-                return true;
-            }
-        }
-        return false;
+        return this.ary.includes(key);
     }
 
     [Symbol.iterator]() {
@@ -59,7 +45,7 @@ class Group {
     }
 }
 
-a = [4,7,9];
+a = [4, 7, 9];
 b = Group.from(a);
 b.add(10);
 b.delete(7);
