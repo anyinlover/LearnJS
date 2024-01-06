@@ -1,4 +1,4 @@
-class MultiplicatorUnitFailure extends Error {}
+class MultiplicatorUnitFailure extends Error { }
 
 function primitiveMultiply(x, y) {
     if (Math.random() > 0.8) {
@@ -7,16 +7,17 @@ function primitiveMultiply(x, y) {
         throw new MultiplicatorUnitFailure("unit failure");
     }
 }
-function multiply(x, y) {
+
+function reliableMultiply(a, b) {
     try {
-        return primitiveMultiply(x, y);
+        return primitiveMultiply(a, b);
     } catch (e) {
         if (e instanceof MultiplicatorUnitFailure) {
-            return multiply(x, y);
+            return reliableMultiply(a, b);
         } else {
             throw e;
         }
     }
 }
 
-console.log(multiply(3,4));
+console.log(reliableMultiply(3, 4));
