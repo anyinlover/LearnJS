@@ -1,26 +1,39 @@
-let reg1 = /car|t/;
-console.log(reg1.test("cars"));
-console.log(reg1.test("cats"));
+verify(/ca[rt]/,
+       ["my car", "bad cats"],
+       ["camper", "high art"]);
 
-let reg2 = /pr?op/;
-console.log(reg2.test("pop"));
-console.log(reg2.test("prop"));
+verify(/pr?op/,
+       ["pop culture", "mad props"],
+       ["plop", "prrrop"]);
 
-let reg3 = /ferr(et)|y|(ari)/;
-console.log(reg3.test("ferret"));
-console.log(reg3.test("ferry"));
-console.log(reg3.test("ferrari"));
+verify(/ferr(et)|y|(ari)/,
+       ["ferret", "ferry", "ferrari"],
+       ["ferrum", "transfer A"]);
 
-let reg4 = /\b\w*ious\b/;
-console.log(reg4.test("delicious"));
+verify(/\b\w*ious\b/,
+       ["how delicious", "spacious room"],
+       ["ruinous", "consciousness"]);
 
-let reg5 = /\s[.|,|:|;]/;
-console.log(reg5.test(" ."));
+verify(/\s[.,:;]/,
+       ["bad punctuation ."],
+       ["escape the period"]);
 
-let reg6 = /\b\w{6,}\b/;
-console.log(reg6.test("helllo"));
-console.log(reg6.test("hello"));
+verify(/\b\w{6,}\b/,
+       ["Siebentausenddreihundertzweiundzwanzig"],
+       ["no", "three small words"]);
 
-let reg7 = /\b[^\WeE]+\b/;
-console.log(reg7.test("Hello"));
-console.log(reg7.test("Htllo"));
+verify(/\b[^\WeE]+\b/,
+       ["red platypus", "wobbling nest"],
+       ["earth bed", "learning ape", "BEET"]);
+
+
+function verify(regexp, yes, no) {
+  // Ignore unfinished exercises
+  if (regexp.source == "...") return;
+  for (let str of yes) if (!regexp.test(str)) {
+    console.log(`Failure to match '${str}'`);
+  }
+  for (let str of no) if (regexp.test(str)) {
+    console.log(`Unexpected match for '${str}'`);
+  }
+}

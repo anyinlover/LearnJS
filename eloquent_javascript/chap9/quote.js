@@ -1,3 +1,3 @@
-let reg = /'\b(\w+)\b'/g;
 
-console.log("'Fun' story is Alice's job 'insert'".replace(reg, `"$1"`));
+let text = "'I'm the cook,' he said, 'it's my job.'";
+console.log(text.replace(/'(.*?[,.?!])'/g, "\"$1\""));

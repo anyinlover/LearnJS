@@ -1,10 +1,15 @@
-let reg = /^[+-]?((\d+(\.\d*)?)|(\.\d+))([Ee][+-]?(\d+))?$/;
+let number = /^[+-]?((\d+(\.\d*)?)|(\.\d+))([Ee][+-]?(\d+))?$/;
 
-console.log(reg.test("-153"));
-console.log(reg.test("+153."));
-console.log(reg.test("+153.98"));
-console.log(reg.test("+.98"));
-console.log(reg.test("+.98E-5"));
-console.log(reg.test("+.98E-5."));
-console.log(reg.test("+.98E-5.9"));
-console.log(reg.test("-fj8"));
+// Tests:
+for (let str of ["1", "-1", "+15", "1.55", ".5", "5.",
+                 "1.3e2", "1E-4", "1e+12"]) {
+  if (!number.test(str)) {
+    console.log(`Failed to match '${str}'`);
+  }
+}
+for (let str of ["1a", "+-1", "1.2.3", "1+1", "1e4.5",
+                 ".5.", "1f5", "."]) {
+  if (number.test(str)) {
+    console.log(`Incorrectly accepted '${str}'`);
+  }
+}
